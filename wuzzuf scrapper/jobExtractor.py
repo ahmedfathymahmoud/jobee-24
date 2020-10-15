@@ -38,13 +38,27 @@ class Job:
         p = detailsElement.pop().split('-')
         time=p.pop()
         detailsElement.extend(p)
-        detailsElement=set(detailsElement)
-        jobTypeWordList={'Full Time','Part Time','Work From Home','Freelance / Project '}
-        ExpWordList={'Entry Level','Manager','Experienced','Senior Management'}
-        jobType=jobTypeWordList & detailsElement
+        detailsElement=set(filter(None,detailsElement))
+        jobTypeWordList={'Internship','Full Time','Part Time','Work From Home','Freelance / Project'}
+        ExpWordList={'Entry Level','Manager','Experienced','Senior Management','Student'}
+        jobType = jobTypeWordList & detailsElement
+        if (jobType) == set():
+            jobType={'Freelance / Project'}
+
         ExpLevel=detailsElement & ExpWordList
         exp=list(filter(lambda x: 'Yrs of Exp' in x, detailsElement))[0]
         detailsElement=detailsElement-(jobType|ExpLevel|{exp})
         return detailsElement,jobType,ExpLevel,exp
 
-
+    def display(self):
+        print('-' * 20,'\n')
+        print("title: ", self.title)
+        print("company: ", self.company)
+        print("location: ", self.location)
+        print("exp: ", self.exp)
+        print("expLevel: ", self.expLevel)
+        print("tags: ", self.tags)
+        print("job Type: ", self.jobType)
+        print("post time: ", self.postTime)
+        print('\n','-' * 20)
+        print("\n\n\n")
