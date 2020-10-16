@@ -1,0 +1,191 @@
+drop table IF EXISTS search_it;
+CREATE TABLE search_it(
+   job_id INT GENERATED ALWAYS AS IDENTITY,
+   title_id INT,
+   company_id INT,
+	job_type_id INT,
+   job_level exp_level,
+	post_date TIMESTAMP,
+   PRIMARY KEY(job_id),
+   CONSTRAINT fk_title
+      FOREIGN KEY(title_id) 
+	  REFERENCES title(title_id),
+	CONSTRAINT fk_company
+      FOREIGN KEY(company_id) 
+	  REFERENCES company(company_id),
+	CONSTRAINT fk_job_type
+      FOREIGN KEY(job_type_id) 
+	  REFERENCES job_types(job_type_id)
+);
+CREATE TABLE job_tags(
+   job_tags_id INT GENERATED ALWAYS AS IDENTITY,
+   job_id INT,
+   tag_id INT,
+   PRIMARY KEY(job_tags_id),
+   CONSTRAINT fk_job
+      FOREIGN KEY(job_id) 
+	  REFERENCES search_it(job_id),
+	CONSTRAINT fk_tag
+      FOREIGN KEY(tag_id) 
+	  REFERENCES tags(tag_id)
+);
+
+
+insert into tags ( tag ) values (
+'php') on conflict (tag) do nothing;
+
+alter table title add constraint name_tag unique(name);
+
+
+============================================
+-- Table: public.search_it
+
+-- DROP TABLE public.search_it;
+
+CREATE TABLE public.search_it
+(
+    job_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    title_id integer,
+    company_id integer,
+    job_type_id integer,
+    job_level exp_level,
+    post_date timestamp without time zone,
+    CONSTRAINT search_it_pkey PRIMARY KEY (job_id),
+    CONSTRAINT fk_company FOREIGN KEY (company_id)
+        REFERENCES public.company (company_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_job_type FOREIGN KEY (job_type_id)
+        REFERENCES public.job_types (job_type_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_title FOREIGN KEY (title_id)
+        REFERENCES public.title (title_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.search_it
+    OWNER to test;
+===========================================
+-- Table: public.job_types
+
+-- DROP TABLE public.job_types;
+
+CREATE TABLE public.job_types
+(
+    job_type_id integer NOT NULL DEFAULT nextval('job_types_id_seq'::regclass),
+    type_name job_type NOT NULL,
+    CONSTRAINT job_types_pkey PRIMARY KEY (job_type_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.job_types
+    OWNER to test;
+==============================================
+-- Table: public.job_tags
+
+-- DROP TABLE public.job_tags;
+
+CREATE TABLE public.job_tags
+(
+    job_tags_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    job_id integer,
+    tag_id integer,
+    CONSTRAINT job_tags_pkey PRIMARY KEY (job_tags_id),
+    CONSTRAINT fk_job FOREIGN KEY (job_id)
+        REFERENCES public.search_it (job_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tag FOREIGN KEY (tag_id)
+        REFERENCES public.tags (tag_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.job_tags
+    OWNER to test;
+==================================================
+insert into title ( name ) values ( '%s') on conflict (name) do nothing RETURNING title_id;
+
+=======================================================================
+-- Table: public.job_tags
+
+-- DROP TABLE public.job_tags;
+
+CREATE TABLE public.job_tags
+(
+    job_tags_id integer NOT NULL DEFAULT nextval('job_tags_job_tags_id_seq'::regclass),
+    job_id integer NOT NULL DEFAULT nextval('job_tags_job_id_seq'::regclass),
+    tag_id integer,
+    CONSTRAINT job_tags_pkey PRIMARY KEY (job_tags_id),
+    CONSTRAINT fk_job FOREIGN KEY (job_id)
+        REFERENCES public.search_it (job_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_tag FOREIGN KEY (tag_id)
+        REFERENCES public.tags (tag_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.job_tags
+    OWNER to test;
+====================================================================
+-- Table: public.search_it
+
+-- DROP TABLE public.search_it;
+
+CREATE TABLE public.search_it
+(
+    job_id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    title_id integer,
+    company_id integer,
+    job_type_id integer,
+    job_level exp_level,
+    post_date timestamp without time zone,
+    exp text COLLATE pg_catalog."default",
+    link text[] COLLATE pg_catalog."default",
+    CONSTRAINT search_it_pkey PRIMARY KEY (job_id),
+    CONSTRAINT fk_company FOREIGN KEY (company_id)
+        REFERENCES public.company (company_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_job_type FOREIGN KEY (job_type_id)
+        REFERENCES public.job_types (job_type_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_title FOREIGN KEY (title_id)
+        REFERENCES public.title (title_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.search_it
+    OWNER to test;
+==============================================================
+-- Table: public.title
+
+-- DROP TABLE public.title;
+
+CREATE TABLE public.title
+(
+    title_id integer NOT NULL DEFAULT nextval('my_serial'::regclass),
+    title_id integer NOT NULL DEFAULT nextval('my_serial'::regclass),
+    name text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT title_pkey PRIMARY KEY (title_id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.title
+    OWNER to test;

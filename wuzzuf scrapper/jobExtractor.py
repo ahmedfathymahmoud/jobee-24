@@ -12,7 +12,6 @@ class Job:
         self.postTime = ""
 
 
-
     def getJobDynamic(self,s):
         def prep(s):
             return s.replace("\n", "").strip()
@@ -45,9 +44,9 @@ class Job:
         if (jobType) == set():
             jobType={'Freelance / Project'}
 
-        ExpLevel=detailsElement & ExpWordList
+        (ExpLevel,) = myset=detailsElement & ExpWordList
         exp=list(filter(lambda x: 'Yrs of Exp' in x, detailsElement))[0]
-        detailsElement=detailsElement-(jobType|ExpLevel|{exp})
+        detailsElement=detailsElement-(jobType|{ExpLevel}|{exp})
         return detailsElement,jobType,ExpLevel,exp
 
     def display(self):
@@ -60,5 +59,6 @@ class Job:
         print("tags: ", self.tags)
         print("job Type: ", self.jobType)
         print("post time: ", self.postTime)
+        print("link: ",self.jobLink)
         print('\n','-' * 20)
         print("\n\n\n")
