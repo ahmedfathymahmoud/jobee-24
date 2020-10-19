@@ -1,0 +1,24 @@
+self.connection.commit()
+sql_title = '''
+        INSERT INTO title( name ) values (%(title)s)
+        EXCEPT
+        SELECT name from title where name =%(title)s;
+        SELECT title_id from title where name =%(title)s;
+
+
+        INSERT INTO company( company_name,address ) values (%(company)s,%(address)s)
+        EXCEPT
+        SELECT company_name from company where (company_name =%(company)s and address=%(address)s) ;
+        SELECT company_id from company where (company_name =%(company)s and address=%(address)s) ;
+        
+        INSERT INTO title( name ) values (%(title)s)
+        EXCEPT
+        SELECT name from title where name =%(ztitle)s;
+        SELECT title_id from title where name =%(title)s;
+
+
+
+'''
+
+self.cursor.execute(sql_title,{'title': jobObj.title+'444556'})
+a=self.cursor.fetchone()
