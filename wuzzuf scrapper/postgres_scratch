@@ -189,3 +189,24 @@ TABLESPACE pg_default;
 
 ALTER TABLE public.title
     OWNER to test;
+===============================================================
+CREATE TABLE public.type_of_job
+(
+    type_of_job_id integer NOT NULL ,
+    job_id integer NOT NULL ,
+    job_type_id integer,
+    CONSTRAINT type_of_job_pkey PRIMARY KEY (type_of_job_id),
+    CONSTRAINT fk_job FOREIGN KEY (job_id)
+        REFERENCES public.search_it (job_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT fk_job_type FOREIGN KEY (job_type_id)
+        REFERENCES public.job_types (job_type_id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.type_of_job
+    OWNER to test;

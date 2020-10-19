@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import datetime
 from jobExtractor import Job
 from SearchLinkGenerator import wuzzufSearchLink
 from dbHandler import JobDB
@@ -7,15 +8,18 @@ from dbHandler import JobDB
 jobCount = 20
 startCount = 0
 
-search = 'python'
+search = 'IT Software Development'
 job = Job()
 db = JobDB()
 db.connect("wuzzuf",search)
-db.clean()
+limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
+limitDate = 'Oct 18 2020 6:40PM'
+limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
+#db.clean()
 while (startCount < jobCount):
 
-    link = wuzzufSearchLink(country="Egypt", start=str(startCount), searchString=search, level="", jobType='',
-                            post_date="")
+    link = wuzzufSearchLink(country="Egypt", start=str(startCount), category=search, level="", jobType='',
+                            post_date="within 24 hours")
     r = requests.get(link.generate())
 
     soup = BeautifulSoup(r.text, "html.parser")
@@ -27,8 +31,9 @@ while (startCount < jobCount):
 
     for s in ss:
         job.getJobDynamic(s)
-        db.add(job)
-        job.display()
+        if datetime.datetime.strptime(job.postTime,'%A, %B %d, %Y at  %I:%M%p')>limitDate :
+            db.add(job)
+            job.display()
 
     startCount += 20
 

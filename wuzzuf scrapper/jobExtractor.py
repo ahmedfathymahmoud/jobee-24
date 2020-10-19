@@ -44,9 +44,14 @@ class Job:
         if (jobType) == set():
             jobType={'Freelance / Project'}
 
-        (ExpLevel,) = myset=detailsElement & ExpWordList
-        exp=list(filter(lambda x: 'Yrs of Exp' in x, detailsElement))[0]
+        (ExpLevel,) =detailsElement & ExpWordList
+        exp = list(filter(lambda x: 'Yrs of Exp' in x, detailsElement))
+        if exp == []:
+            exp = ""
+        else:
+            exp = exp[0]
         detailsElement=detailsElement-(jobType|{ExpLevel}|{exp})
+        jobType=" ,".join(jobType)
         return detailsElement,jobType,ExpLevel,exp
 
     def display(self):
