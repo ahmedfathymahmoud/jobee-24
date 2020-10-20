@@ -3,7 +3,7 @@ import os
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=3)
 def timed_job():
     os.system("python3 './wuzzuf scrapper/LastestJobsUpdatesHeroku.py'")
 
