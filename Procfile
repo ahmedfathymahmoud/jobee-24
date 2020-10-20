@@ -1,2 +1,2 @@
 clock: python3 clock.py
-worker: python script.py
+worker: python3 './wuzzuf scrapper/LastestJobsUpdatesHeroku.py'

@@ -1,10 +1,11 @@
 from apscheduler.schedulers.blocking import BlockingScheduler
+import os
 
 sched = BlockingScheduler()
 
-@sched.scheduled_job('interval', minutes=30)
+@sched.scheduled_job('interval', minutes=3)
 def timed_job():
-    exec(open("./wuzzuf scrapper/LastestJobsUpdatesHeroku.py").read())
+    os.system("python3 './wuzzuf scrapper/LastestJobsUpdatesHeroku.py'")
 
 # @sched.scheduled_job('cron', day_of_week='mon-fri', hour=17)
 # def scheduled_job():
