@@ -3,13 +3,14 @@ from bs4 import BeautifulSoup
 from jobExtractor import Job
 from SearchLinkGenerator import wuzzufSearchLink
 from dbHandler import JobDB
-
+from telegram_jobee import tele_jobee
 jobCount = 20
 startCount = 0
 
 search = 'python'
 job = Job()
 db = JobDB()
+jobee=tele_jobee()
 db.connect("wuzzuf",search)
 db.clean()
 while (startCount < jobCount):
@@ -28,6 +29,7 @@ while (startCount < jobCount):
     for s in ss:
         job.getJobDynamic(s)
         db.add(job)
+        jobee.post_job(job)
         job.display()
 
     startCount += 20

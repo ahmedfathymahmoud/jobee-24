@@ -4,6 +4,7 @@ import datetime
 from jobExtractor import Job
 from SearchLinkGenerator import wuzzufSearchLink
 from dbHandlerRemote import JobDB
+from telegram_jobee import tele_jobee
 
 jobCount = 20
 startCount = 0
@@ -11,6 +12,7 @@ startCount = 0
 search = 'IT Software Development'
 job = Job()
 db = JobDB()
+jobee=tele_jobee()
 db.connect("d9kearbfv95d1f",search)
 limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
 #limitDate = 'Oct 18 2020 6:40PM'
@@ -33,6 +35,7 @@ while (startCount < jobCount):
         job.getJobDynamic(s)
         if datetime.datetime.strptime(job.postTime,'%A, %B %d, %Y at  %I:%M%p')>limitDate :
             db.add(job)
+            jobee.post_job(job)
             job.display()
 
     startCount += 20

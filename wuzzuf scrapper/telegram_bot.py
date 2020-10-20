@@ -9,17 +9,17 @@ Basic Echobot example, repeats messages.
 Press Ctrl-C on the command line or send a signal to the process to stop the
 bot.
 """
-
-import logging
+#
+# import logging
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 # Enable logging
-logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
-)
-
-logger = logging.getLogger(__name__)
+# logging.basicConfig(
+#     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO
+# )
+#
+# logger = logging.getLogger(__name__)
 
 
 # Define a few command handlers. These usually take the two arguments update and
@@ -34,7 +34,7 @@ def help_command(update, context):
     update.message.reply_text('Help!')
 
 
-def echo(update, context):
+def send_tele(update, context):
     """Echo the user message."""
     update.message.reply_text(update.message.text)
 
@@ -54,10 +54,11 @@ def main():
     dp.add_handler(CommandHandler("help", help_command))
 
     # on noncommand i.e message - echo the message on Telegram
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, echo))
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, send_tele))
 
     # Start the Bot
     updater.start_polling()
+
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
