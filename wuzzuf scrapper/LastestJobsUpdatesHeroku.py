@@ -8,19 +8,19 @@ from telegram_jobee import tele_jobee
 
 jobCount = 20
 startCount = 0
-
+TableName='it_software_development'
 search = 'IT Software Development'
 job = Job()
 db = JobDB()
-jobee=tele_jobee()
-db.connect("d9kearbfv95d1f",search)
+jobee=tele_jobee("@jobee24")
+db.connect("d9kearbfv95d1f",TableName)
 limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
-#limitDate = 'Oct 18 2020 6:40PM'
-#limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
+# limitDate = 'Oct 18 2020 6:40PM'
+# limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
 #db.clean()
 while (startCount < jobCount):
 
-    link = wuzzufSearchLink(country="Egypt", start=str(startCount), category=search, level="", jobType='',
+    link = wuzzufSearchLink(country="", start=str(startCount), category=search, level="", jobType='',
                             post_date="within 24 hours")
     r = requests.get(link.generate())
 

@@ -14,7 +14,7 @@ class wuzzufSearchLink:
     def generate(self):
 
         if self.category != "":
-            link = self.baseLink + "/a/" + self.category + "-Jobs-in-Egypt?start=" + self.start
+            link = self.baseLink + "/a/" + self.category + "?start=" + self.start
             self.searchString = self.category
             self.date=self.date.replace('_',' ').replace('within','Past').replace('h','H')
         else:
