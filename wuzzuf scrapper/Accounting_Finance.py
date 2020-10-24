@@ -9,7 +9,7 @@ from telegram_jobee import tele_jobee
 
 
 tableName = 'accounting_finance'
-searchArr = ['Accounting-Finance-Jobs-in-Egypt', 'Banking-Jobs-in-Egypt', 'Logistics-Supply-Chain-in-Egypt','Sales-Jobs-in-Egypt']
+searchArr = ['Accounting-Finance-Jobs-in-Egypt', 'Banking-Jobs-in-Egypt', 'Logistics-Supply-Chain-in-Egypt']
 job = Job()
 db = JobDB()
 jobee = tele_jobee("@jobee25")
@@ -36,11 +36,10 @@ for searchStr in searchArr:
 
         for s in ss:
             job.getJobDynamic(s)
-            if datetime.datetime.strptime(job.postTime, '%A, %B %d, %Y at  %I:%M%p') > limitDate:
-                if db.executeQuery("select job_id from {} where link='{}'".format(tableName, job.jobLink)) == []:
-                    db.add(job)
-                    jobee.post_job(job)
-                    job.display()
+            if db.executeQuery("select job_id from {} where link='{}'".format(tableName, job.jobLink)) == []:
+                db.add(job)
+                jobee.post_job(job)
+                job.display()
         startCount += 20
 
 db.close()

@@ -8,13 +8,13 @@ from telegram_jobee import tele_jobee
 
 jobCount = 20
 startCount = 0
-TableName='it_software_development'
+tableName='it_software_development'
 search = 'IT Software Development'
 job = Job()
 db = JobDB()
 jobee=tele_jobee("@jobee24")
-db.connect("d9kearbfv95d1f",TableName)
-limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
+db.connect("d9kearbfv95d1f",tableName)
+# limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
 # limitDate = 'Oct 18 2020 6:40PM'
 # limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
 #db.clean()
@@ -33,7 +33,7 @@ while (startCount < jobCount):
 
     for s in ss:
         job.getJobDynamic(s)
-        if datetime.datetime.strptime(job.postTime,'%A, %B %d, %Y at  %I:%M%p')>limitDate :
+        if db.executeQuery("select job_id from {} where link='{}'".format(tableName, job.jobLink)) == []:
             db.add(job)
             jobee.post_job(job)
             job.display()
