@@ -15,7 +15,7 @@ db = JobDB()
 jobee=tele_jobee("@jobee24")
 db.connect("d9kearbfv95d1f",tableName)
 # limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
-# limitDate = 'Oct 18 2020 6:40PM'
+# limitDate = 'Nov 2 2020 4:40PM'
 # limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
 #db.clean()
 while (startCount < jobCount):
@@ -33,7 +33,8 @@ while (startCount < jobCount):
 
     for s in ss:
         job.getJobDynamic(s)
-        if db.executeQuery("select job_id from {} where link='{}'".format(tableName, job.jobLink)) == []:
+        # if datetime.datetime.strptime(job.postTime,'%A, %B %d, %Y at  %I:%M%p')>limitDate :
+        if db.executeQuery("select job_id from {} where post_date='{}'".format(tableName, job.postTime)) == []:
             db.add(job)
             jobee.post_job(job)
             job.display()

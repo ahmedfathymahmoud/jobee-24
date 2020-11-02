@@ -14,8 +14,8 @@ job = Job()
 db = JobDB()
 jobee = tele_jobee("@jobee25")
 db.connect("d9kearbfv95d1f", tableName)
-limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
-# limitDate = 'Oct 21 2020 1:00AM'
+# limitDate=db.executeQuery('select max(post_date)from it_software_development ')[0][0]
+# limitDate = 'Nov 2 2020 4:40PM'
 # limitDate = datetime.datetime.strptime(limitDate, '%b %d %Y %I:%M%p')
 # db.clean()
 for searchStr in searchArr:
@@ -36,7 +36,7 @@ for searchStr in searchArr:
 
         for s in ss:
             job.getJobDynamic(s)
-            if db.executeQuery("select job_id from {} where link='{}'".format(tableName, job.jobLink)) == []:
+            if db.executeQuery("select job_id from {} where post_date='{}'".format(tableName, job.postTime)) == []:
                 db.add(job)
                 jobee.post_job(job)
                 job.display()
