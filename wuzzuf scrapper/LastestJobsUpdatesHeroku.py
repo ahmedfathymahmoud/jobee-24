@@ -20,15 +20,17 @@ db.connect("d9kearbfv95d1f",tableName)
 #db.clean()
 while (startCount < jobCount):
 
-    link = wuzzufSearchLink(country="", start=str(startCount), category=search, level="", jobType='',
-                            post_date="within 24 hours")
-    r = requests.get(link.generate())
+    # link = wuzzufSearchLink(country="", start=str(startCount), category=search, level="", jobType='',
+    #                         post_date="within 24 hours")
+    link = "https://wuzzuf.net/search/jobs?a=navbg&filters%5Bcountry%5D%5B0%5D=Egypt&filters%5Bpost_date%5D%5B0%5D" \
+           "=within_24_hours&filters%5Broles%5D%5B0%5D=IT%2FSoftware%20Development&start="+str(startCount)
+    r = requests.get(link)
 
     soup = BeautifulSoup(r.text, "html.parser")
     ss = soup.find_all("div", {"class": "result-wrp row"})
     if startCount == 0:
         jobCount = int(soup.find("span", {"class": "search-jobs-count"}).text)
-        print(link.generate())
+        print(link)
         print("Job Count:", jobCount, "\n")
 
     for s in ss:
