@@ -6,10 +6,9 @@ from SearchLinkGenerator import wuzzufSearchLink
 from dbHandlerRemote import JobDB
 from telegram_jobee import tele_jobee
 
-
-
 tableName = 'accounting_finance'
-searchArr = ['Accounting-Finance-Jobs-in-Egypt', 'Banking-Jobs-in-Egypt', 'Logistics-Supply-Chain-in-Egypt']
+#searchArr = ['Accounting-Finance-Jobs-in-Egypt', 'Banking-Jobs-in-Egypt', 'Logistics-Supply-Chain-in-Egypt']
+searchArr = ['Accounting-Finance-Jobs-in-Egypt']
 job = Job()
 db = JobDB()
 jobee = tele_jobee("@jobee25")
@@ -23,15 +22,17 @@ for searchStr in searchArr:
     startCount = 0
     while startCount < jobCount:
 
-        link = wuzzufSearchLink(country="", start=str(startCount), category=searchStr, level="", jobType='',
-                                post_date="within 24 hours")
-        r = requests.get(link.generate())
-
+        # link = wuzzufSearchLink(country="", start=str(startCount), category=searchStr, level="", jobType='',
+        #                        post_date="within 24 hours")
+        link = "https://wuzzuf.net/a/Accounting-Finance-Jobs-in-Egypt?filters%5Broles%5D%5B0%5D=Accounting%2FFinance&filters%5Broles%5D%5B1%5D=Logistics%2FSupply%20Chain&filters%5Broles%5D%5B2%5D=Banking&filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&start=" + \
+            str(startCount)
+        r = requests.get(link)
         soup = BeautifulSoup(r.text, "html.parser")
         ss = soup.find_all("div", {"class": "result-wrp row"})
         if startCount == 0:
-            jobCount = int(soup.find("span", {"class": "search-jobs-count"}).text)
-            print(link.generate())
+            jobCount = int(
+                soup.find("span", {"class": "search-jobs-count"}).text)
+            print(link)
             print("Job Count:", jobCount, "\n")
 
         for s in ss:

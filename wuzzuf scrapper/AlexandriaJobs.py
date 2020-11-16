@@ -20,7 +20,7 @@ db.connect("d9kearbfv95d1f", tableName)
 # db.clean()
 while (startCount < jobCount):
 
-    link = "https://wuzzuf.net/search/jobs/?a=navbl&filters%5Bcity%5D%5B0%5D=Alexandria&filters%5Bpost_date%5D%5B0%5D=within_24_hours&start=" + \
+    link = "https://wuzzuf.net/a/Jobs-in-alexandria?filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&filters%5Bcity%5D%5B0%5D=Alexandria&start=" + \
         str(startCount)
     r = requests.get(link)
 
