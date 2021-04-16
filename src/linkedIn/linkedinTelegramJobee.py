@@ -2,7 +2,7 @@ from lib.linkedIn.linkedInScrapper import LinkedinJobSearch
 from lib.telegramBot.telegramJobee import tele_jobee
 import json
 
-with open("telegramBots.json") as jsonFile:
+with open("./telegramBots.json") as jsonFile:
     botData = json.load(jsonFile)
 
 
