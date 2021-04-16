@@ -5,7 +5,7 @@ from lib.wuzzuf.db_handler.dbHandlerRemote import JobDB
 from lib.telegramBot.telegramJobee import tele_jobee
 import json
 
-with open("./wuzzufTeleBots.json") as jsonFile:
+with open('./wuzzufTeleBots.json') as jsonFile:
     botData = json.load(jsonFile)
 
 for channel in botData:
