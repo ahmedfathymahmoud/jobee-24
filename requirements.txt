@@ -5,4 +5,5 @@ psycopg2
 psycopg2-binary==2.8.6
 requests
 APScheduler
+pydrive
 python-telegram-bot

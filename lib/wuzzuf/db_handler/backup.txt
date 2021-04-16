@@ -1,0 +1,27 @@
+backup
+pg_dump -U fscjjarkblijha -h ec2-34-233-226-84.compute-1.amazonaws.com -p 5432 -W -d "d9kearbfv95d1f"
+
+e645f1bd44dae55d6dd3329ba92f33f56dbdd00da85706b7d2a39a2e3c6e42bb
+
+
+
+delete from accounting_finance_job_tags;
+ALTER SEQUENCE accounting_finance_job_tags_id_seq RESTART WITH 1;
+
+
+delete from alexandria_jobs_job_tags;
+ALTER SEQUENCE alexandria_jobs_job_tags_id_seq RESTART WITH 1;
+
+delete from it_software_development_job_tags;
+ALTER SEQUENCE it_software_development_job_tags_id_seq RESTART WITH 1;
+
+delete from it_software_development;
+ALTER SEQUENCE it_software_development_job_id_seq RESTART WITH 1;
+
+delete from alexandria_jobs;
+ALTER SEQUENCE alexandria_jobs_job_id_seq RESTART WITH 1;
+
+delete from accounting_finance;
+ALTER SEQUENCE accounting_finance_job_id_seq RESTART WITH 1;
+
+select * from it_software_development_job_tags as t join it_software_development as i on t.job_id = i.job_id;

@@ -1,0 +1,44 @@
+[{
+	"chid":"@jobee24",
+	"param":[
+					{
+						"searchLink":"https://wuzzuf.net/a/IT-Software-Development-Jobs-in-Egypt?filters%5Broles%5D%5B0%5D=IT%2FSoftware%20Development&filters%5Broles%5D%5B1%5D=Engineering%20-%20Telecom%2FTechnology&filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&start=",
+						"table":"it_software_development"
+					}
+	]
+
+},
+{
+	"chid":"@jobee26",
+	"param":[
+					{
+						"searchLink":"https://wuzzuf.net/a/Jobs-in-alexandria?filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&filters%5Bcity%5D%5B0%5D=Alexandria&start=",
+						"table":"Alexandria_Jobs"
+					}
+    ]
+
+},
+{
+	"chid":"@jobee25",
+	"param":[
+		{
+			"searchLink": "https://wuzzuf.net/a/Accounting-Finance-Jobs-in-Egypt?filters%5Broles%5D%5B0%5D=Accounting%2FFinance&filters%5Broles%5D%5B1%5D=Logistics%2FSupply%20Chain&filters%5Broles%5D%5B2%5D=Banking&filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&start=",
+			"table": "accounting_finance"
+		}
+
+	]
+
+},
+{
+	"chid":"@jobee28",
+	"param":[
+		{
+			"searchLink": "https://wuzzuf.net/a/system%20admin%20or%20devops%20or%20linux?filters%5Broles%5D%5B0%5D=IT%2FSoftware%20Development&filters%5Broles%5D%5B1%5D=Engineering%20-%20Telecom%2FTechnology&filters%5Bpost_date%5D%5B0%5D=Past%2024%20Hours&start=",
+			"table": "system_admin"
+		}
+
+	]
+
+}
+
+]
