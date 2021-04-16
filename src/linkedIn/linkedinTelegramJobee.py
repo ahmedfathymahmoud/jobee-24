@@ -2,7 +2,8 @@ from lib.linkedIn.linkedInScrapper import LinkedinJobSearch
 from lib.telegramBot.telegramJobee import tele_jobee
 import json
 
-with open('./telegramBots.json') as jsonFile:
+
+with open('./src/linkedIn/telegramBots.json') as jsonFile:
     botData = json.load(jsonFile)
 
 
@@ -13,7 +14,7 @@ for channel in botData:
     for param in channel['param']:
         searchString = param['search']
         location = param['location']
-        linksFile = "./links/" + searchString + location + ".txt"
+        linksFile = "./src/linkedIn/links/" + searchString + location + ".txt"
         linkedIn = LinkedinJobSearch(linksFile, searchString, location)
         jobs = linkedIn.Scrape()
         for job in jobs:

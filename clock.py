@@ -6,13 +6,13 @@ sched = BlockingScheduler()
 
 @sched.scheduled_job('interval', minutes=30)
 def timed_job():
-    os.system("python3 './src/wuzzuf/wuzzufTelegramJobee.py'")
-    os.system("python3 './src/linkedIn/linkedinTelegramJobee.py'")
+    os.system("python3 -m src.wuzzuf.wuzzufTelegramJobee")
+    os.system("python3 -m src.linkedIn.linkedinTelegramJobee")
 
 
 @sched.scheduled_job('cron', day_of_week='tue', hour=17)
 def scheduled_job():
-    os.system("python3 './src/wuzzuf/weekly_backup.py'")
+    os.system("python3 -m src.wuzzuf.weekly_backup")
 
 
 sched.start()
