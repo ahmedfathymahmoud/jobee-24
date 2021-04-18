@@ -1,10 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import datetime
-from jobExtractor import Job
-from SearchLinkGenerator import wuzzufSearchLink
-from wuzzuf_scrapper.db_handler.dbHandlerRemote import JobDB
-from telegram_jobee import tele_jobee
+from lib.wuzzuf.jobExtractor import Job
+from lib.wuzzuf.db_handler.dbHandlerRemote import JobDB
+from lib.telegramBot.telegramJobee import  tele_jobee
 
 jobCount = 20
 startCount = 0
