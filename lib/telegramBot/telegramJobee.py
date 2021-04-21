@@ -7,7 +7,7 @@ class tele_jobee:
     def __init__(self, chat_id):
         token = os.environ.get("Telegram_Token")
         if token == None:
-            token = "1245931845:AAF1qNbxViUf-0eYEQkh8Kd2xh0xjEF4qJM"
+            token = "1245931845:AAHN4cAPgoMJwAwHYj88hoz5frM5074eYqQ"
         self.token = token
         self.chat_id = chat_id
         self.baseUrl = 'https://api.telegram.org/bot' + self.token
